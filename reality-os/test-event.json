@@ -1,0 +1,11 @@
+{
+    "version": "2.0",
+    "routeKey": "GET /gemini/proxy",
+    "rawPath": "/gemini/proxy",
+    "requestContext": {
+        "http": {
+            "method": "POST"
+        }
+    },
+    "body": "{\"model\": \"gemini-2.0-flash\", \"contents\": []}"
+}

@@ -1,0 +1,7 @@
+
+# Root Agent Credentials
+.agent/.credentials
+.agent/rough_draft/*
+.agent/chats/*
+.agent/memories/*
+.agent/tasks/*

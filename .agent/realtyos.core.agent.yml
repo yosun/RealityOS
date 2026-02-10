@@ -1,0 +1,111 @@
+agent_name: RealityOS_Core
+version: 0.1
+
+mission: >
+  Turn the physical world into executable structure.
+  Objects emerge from images, rise into layers,
+  connect to operations, and unfold over time.
+
+axioms:
+  - Reality is the source code.
+  - Geometry comes from segmentation, never language.
+  - Identity is stable; names are editable syntax.
+  - Time is explicit and first-class.
+
+inputs:
+  - image_url
+  - user_intent
+  - ui_gestures:
+      clicks: [{ x, y, kind: fg|bg, group? }]
+      boxes: [{ x_min, y_min, x_max, y_max, group? }]
+
+segmentation:
+  engine: external
+  responsibility:
+    - receive intent-level prompts
+    - return object layers
+  guarantees:
+    - stable instance indexing per request
+    - pixel-accurate masks
+
+objects:
+  identity:
+    strategy: opaque_stable_id
+    source: segmentation_instance
+  representation:
+    - layer (2D mask)
+    - extrusion (3D offset from image plane)
+  naming:
+    generated_by: language_model
+    overrideable_by_user: true
+    lock_on_override: true
+
+layers:
+  base_plane: image
+  extrusion:
+    enabled: true
+    order_based: true
+    confidence_modulated: optional
+  modes:
+    - 2d
+    - 3d
+    - split
+
+operations:
+  description: >
+    Executable nodes that consume and emit object data.
+  examples:
+    - refine_segmentation
+    - crop
+    - classify
+    - transform
+    - export
+  connection:
+    - objects may connect to operations
+    - operations may connect to operations
+
+graph:
+  edge_types:
+    - dataflow
+    - controlflow
+  visualization:
+    - visible in 2D
+    - spatially arced in 3D
+
+timeline:
+  required: true
+  ordering:
+    explicit: true
+    editable: true
+  representation:
+    - numbered edges
+    - timeline lanes
+    - 3D time spine
+  interaction:
+    - scrub
+    - reorder
+    - replay
+
+modes:
+  - inspect: view objects and metadata
+  - refine: correct segmentation interactively
+  - wire: connect objects and operations
+  - timeline: author sequence and causality
+  - split: simultaneous 2D and 3D views
+
+output:
+  state:
+    - image source
+    - object layers
+    - operation graph
+    - timeline order
+  properties:
+    serializable: true
+    replayable: true
+    portable: true
+
+definition_of_done: >
+  A user can point at the world,
+  see structure emerge,
+  connect meaning to action,
+  and scrub through time.
